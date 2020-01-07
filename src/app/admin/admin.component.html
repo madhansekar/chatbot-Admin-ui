@@ -1,0 +1,203 @@
+<div class="container bg-gray shadow-lg mt-5 py-3">
+  <kendo-tabstrip (tabSelect)="onTabSelect($event)">
+    <kendo-tabstrip-tab [title]="'Add Topic'" [selected]="true">
+      <ng-template kendoTabContent>
+          <form  [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+              <div class="row">
+                <div class="row content col-md-12">
+                    <div class="col-sm-4">
+                        <div class="col-sm-4">
+                            <label class="mt-2">ServiceLine:</label>
+                          </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-4">
+                            <label class="mt-2">Competency:</label>
+                          </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-4">
+                            <label class="mt-2">SubCompetency:</label>
+                          </div>
+                    </div>
+                </div>
+                <div class="row content col-md-12">
+
+
+                  <div class="col-sm-4">
+
+                        <kendo-combobox [data]="serviceLines" formControlName="subServiceLine" (valueChange)="onChangeServiceLine($event)" textField="subServicelineName"
+                        valueField="subServicelineId" [allowCustom]="false">
+                      </kendo-combobox>
+
+                  </div>
+                  <div class="col-sm-4">
+
+                        <kendo-combobox [data]="listCompetencies" formControlName="competency" (valueChange)="onChangeCompetency($event)" textField="competencyName"
+                        valueField="competencyId" [allowCustom]="false">
+                      </kendo-combobox>
+                  </div>
+                  <div class="col-sm-4">
+                      <kendo-combobox [data]="listSubCompetencies" formControlName="subCompetency" (valueChange)="onChangeSubCompetency($event)" textField="subCompetencyName"
+                        valueField="subCompetencyId" [allowCustom]="false">
+                      </kendo-combobox>
+                  </div>
+                </div>
+
+
+
+
+
+                </div>
+                <div>
+                  <div class="btn-group pull-right mt-4 mb-3">
+                      <div>
+                          <button type="button" class="btn m-1" [disabled]="this.userForm.invalid" (click)="onAddTopic()">
+                            <i class="fa  fa-plus-circle"  aria-hidden="true"></i> Add
+                          </button>
+
+                          <button type="button" class="btn m-1" (click)="onDelete()">
+                            <i class="fa fa-remove"  aria-hidden="true"></i> Delete
+                          </button>
+
+                          <button type="button" [disabled]="validateTopic()"class="btn m-1" (click)="onSaveTopic()">
+                            <i class="fa fa-save"  aria-hidden="true"></i> Save
+                          </button>
+                        </div>
+
+                  </div>
+
+                </div>
+                <div class="row col-sm-12 pr-0 d-flex justify-content-center">
+                    <ag-grid-angular  #agGrid style="
+                              height: 300px;
+                              text-align:left ;width: 75%"
+                                      class="ag-theme-balham-dark"  [rowData]="rowData"
+                                      [columnDefs]="columnDefs" [enableSorting]="true"  [pagination]="true"
+                                      [paginationPageSize]="20" [enableColResize]="true"
+                                      [rowSelection]="rowSelection"
+
+                                      [suppressRowClickSelection]="true"
+                                      [rowSelection]="rowSelection"
+                                       [singleClickEdit]="true"
+                                       (gridReady)="onGridReady($event)">
+                                  </ag-grid-angular>
+                </div>
+
+
+
+          </form>
+
+      </ng-template>
+    </kendo-tabstrip-tab>
+    <kendo-tabstrip-tab [title]="'Add SubTopic'">
+        <ng-template kendoTabContent>
+            <form  [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+                <div class="row col-md-12">
+                  <div class="row content col-md-12">
+                      <div class="col-sm-4">
+                          <div class="col-sm-4">
+                              <label class="mt-2">ServiceLine:</label>
+                            </div>
+                      </div>
+                      <div class="col-sm-4">
+                          <div class="col-sm-4">
+                              <label class="mt-2">Competency:</label>
+                            </div>
+                      </div>
+                      <div class="col-sm-4">
+                          <div class="col-sm-4">
+                              <label class="mt-2">SubCompetency:</label>
+                            </div>
+                      </div>
+                  </div>
+                  <div class="row content col-md-12">
+
+
+                    <div class="col-sm-4">
+
+                          <kendo-combobox [data]="serviceLines" formControlName="subServiceLine" (valueChange)="onChangeServiceLine($event)" textField="subServicelineName"
+                          valueField="subServicelineId" [allowCustom]="false">
+                        </kendo-combobox>
+
+                    </div>
+                    <div class="col-sm-4">
+
+                          <kendo-combobox [data]="listCompetencies" formControlName="competency" (valueChange)="onChangeCompetency($event)" textField="competencyName"
+                          valueField="competencyId" [allowCustom]="false">
+                        </kendo-combobox>
+                    </div>
+                    <div class="col-sm-4">
+                        <kendo-combobox [data]="listSubCompetencies" formControlName="subCompetency" (valueChange)="onChangeSubCompetency($event)" textField="subCompetencyName"
+                          valueField="subCompetencyId" [allowCustom]="false">
+                        </kendo-combobox>
+                    </div>
+                  </div>
+                  <div class="row content col-md-12">
+                      <div class="col-sm-4">
+                          <div class="col-sm-4">
+                              <label class="mt-2">Topics:</label>
+                            </div>
+                      </div>
+
+
+                  </div>
+
+                  <div class="row content col-md-12">
+
+
+                      <div class="col-sm-4">
+
+                          <kendo-combobox [data]="listTopics" formControlName="topic" (valueChange)="onChangeTopic($event)" textField="topicName"
+                             valueField="topicId" [allowCustom]="false">
+                            </kendo-combobox>
+
+                      </div>
+
+                    </div>
+
+
+                  </div>
+                  <div class="btn-group pull-right mt-4 mb-3 mr-3">
+                    <div>
+                        <button type="button" class="btn m-1" [disabled]="this.userForm.invalid" (click)="onAddTopic()">
+                          <i class="fa  fa-plus-circle"  aria-hidden="true"></i> Add
+                        </button>
+
+                        <button type="button" class="btn m-1" (click)="onDelete()">
+                          <i class="fa fa-remove"  aria-hidden="true"></i> Delete
+                        </button>
+                      </div>
+
+                </div>
+                  <div class="row  col-md-12 d-flex justify-content-center">
+                      <ag-grid-angular #agGrid style="
+                      height: 300px;
+                      text-align:left ;width: 80%"
+                                         class="ag-theme-balham-dark"  [rowData]="rowData"
+                                        [columnDefs]="columnDefs" [enableSorting]="true"  [pagination]="true"
+                                        [paginationPageSize]="20" [enableColResize]="true"
+                                        [rowSelection]="rowSelection"
+
+                                        [suppressRowClickSelection]="true"
+                                        [rowSelection]="rowSelection"
+                                         [singleClickEdit]="true"
+                                         (gridReady)="onGridReady($event)">
+                                    </ag-grid-angular>
+                  </div>
+                  <div class="row pull-right mr-3">
+                    <button type="button" [disabled]="validateTopic()"class="btn m-1" (click)="onSaveTopic()">
+                      <i class="fa fa-save"  aria-hidden="true"></i> Submit
+                    </button>
+                  </div>
+
+
+
+            </form>
+
+        </ng-template>
+    </kendo-tabstrip-tab>
+
+  </kendo-tabstrip>
+</div>
+

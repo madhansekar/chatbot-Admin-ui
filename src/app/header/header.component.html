@@ -1,0 +1,27 @@
+<div class="container-fluid p-0 shadow-lg z-index">
+    <div class="navbar navbar-expand-sm bg-dark navbar-dark h-60">
+        <a class="navbar-brand" href="#">
+            <img class="logo" src="assets/images/EY_logo_white.png">
+            <span class="chatbot ml-3 text-white">Interview-Chatbot</span>
+
+        </a>
+        <div class="w-100">
+            <div class="btn-group float-right" dropdown>
+                <button id="button-basic" dropdownToggle type="button"
+                    class="btn text-white border-0 transparent border font-18 mt-4" aria-controls="dropdown-basic">
+                    Account <fa-icon [icon]="faAngleDown" class="ml-2"></fa-icon>
+                </button>
+                <div>
+                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu tab" role="menu"
+                        aria-labelledby="button-basic">
+
+                        <li role="menuitem" class="tab"><a class="dropdown-item text-gray tab">
+                                <fa-icon [icon]="faUser" class="mr-2"></fa-icon>Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+<div class="container mt-5">
+  <div class="bg-gray shadow-lg p-4">
+    <form  [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+      <div class="row col-md-12">
+        <div class="row content col-md-12">
+            <div class="col-sm-4">
+                <div class="col-sm-4">
+                    <label class="mt-2">ServiceLine:</label>
+                  </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-4">
+                    <label class="mt-2">Competency:</label>
+                  </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-4">
+                    <label class="mt-2">SubCompetency:</label>
+                  </div>
+            </div>
+        </div>
+        <div class="row content col-md-12">
+
+
+          <div class="col-sm-4">
+
+                <kendo-combobox [data]="serviceLines" formControlName="subServiceLine" (valueChange)="onChangeServiceLine($event)" textField="subServicelineName"
+                valueField="subServicelineId" [allowCustom]="false">
+              </kendo-combobox>
+
+          </div>
+          <div class="col-sm-4">
+
+                <kendo-combobox [data]="listCompetencies" formControlName="competency" (valueChange)="onChangeCompetency($event)" textField="competencyName"
+                valueField="competencyId" [allowCustom]="false">
+              </kendo-combobox>
+          </div>
+          <div class="col-sm-4">
+              <kendo-combobox [data]="listSubCompetencies" formControlName="subCompetency" (valueChange)="onChangeSubCompetency($event)" textField="subCompetencyName"
+                valueField="subCompetencyId" [allowCustom]="false">
+              </kendo-combobox>
+          </div>
+        </div>
+        <div class="row content col-md-12">
+            <div class="col-sm-4">
+                <div class="col-sm-4">
+                    <label class="mt-2">Topics:</label>
+                  </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-4">
+                    <label class="mt-2">SubTopics:</label>
+                  </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="col-sm-4">
+                  <label class="mt-2">Levels:</label>
+                </div>
+          </div>
+
+        </div>
+
+        <div class="row content col-md-12">
+
+
+            <div class="col-sm-4">
+
+                <kendo-combobox [data]="listTopics" formControlName="topic" (valueChange)="onChangeTopic($event)" textField="topicName"
+                   valueField="topicId" [allowCustom]="false">
+                  </kendo-combobox>
+
+            </div>
+            <div class="col-sm-4">
+
+                  <kendo-combobox [data]="listSubTopics" formControlName="subTopic"  textField="subTopicName" (valueChange)="onChangeSubTopic($event)"
+                  valueField="subTopicId" [allowCustom]="false">
+                 </kendo-combobox>
+            </div>
+            <div class="col-sm-4">
+
+              <kendo-combobox [data]="listLevels" formControlName="level"  textField="description" (valueChange)="onChangeLevel($event)"
+              valueField="levelId" [allowCustom]="false">
+             </kendo-combobox>
+        </div>
+
+
+          </div>
+
+
+
+        </div>
+        <div class="row d-flex justify-content-end mr-3">
+        <button type="button" [disabled]="isSaveDisbled()"class="btn mt-3" (click)="onSearch()">
+          <i class="fa fa-save"  aria-hidden="true"></i> Submit
+        </button>
+      </div>
+
+
+  </form>
+    <div>
+      <div class="row  col-md-12 pr-0">
+        <ag-grid-angular  #agGrid style="
+                  height: 300px;
+                  text-align: left;width: 100%"
+                          class="ag-theme-balham-dark"  [rowData]="rowData"
+                          [columnDefs]="columnDefs" [enableSorting]="true"  [pagination]="true"
+                          [paginationPageSize]="20" [enableColResize]="true"
+                          [rowSelection]="rowSelection"
+
+                          [suppressRowClickSelection]="true"
+                          [rowSelection]="rowSelection"
+                           [singleClickEdit]="true"
+                           (gridReady)="onGridReady($event)">
+                      </ag-grid-angular>
+    </div>
+    </div>
+    <div class="text-right mt-4">
+      <button type="button" class="btn btn-continue">
+        <i class="fa fa-save"  aria-hidden="true"></i>SAVE
+      </button>
+    </div>
+  </div>
+</div>
