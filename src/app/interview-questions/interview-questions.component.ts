@@ -33,6 +33,7 @@ export class InterviewQuestionsComponent implements OnInit {
   subCompetencies: SubCompetency[];
   topics: Topics[];
   subTopics: SubTopics[];
+  levels:any;
   listCompetencies: Competency[];
   listSubCompetencies: SubCompetency[];
   listTopics: Topics[];
@@ -66,44 +67,7 @@ export class InterviewQuestionsComponent implements OnInit {
     this.rowData = [];
 
 
-    this.columnDefs = [
-      { field: '', width: 30, editable: false, headerCheckboxSelection: true, checkboxSelection: true, },
-      {headerName: 'Question', field: 'question', editable: true},
-      {headerName: 'Choice 1', field: 'choice1', editable: true},
-      {headerName: 'Choice 2', field: 'choice2', editable: true},
-      {headerName: 'Choice 3', field: 'choice3', editable: true},
-      {headerName: 'Choice 4', field: 'choice4', editable: true},
-      {headerName: 'Choice 5', field: 'choice5', editable: true},
-      {headerName: 'Correct Answer', field: 'correctanswer', editable: true , cellEditor: 'agRichSelectCellEditor',
-             cellEditorParams(params) {
-               const list = [];
-               if (params.data.choice1 && params.data.choice1 !== null && params.data.choice1 !== '') {
-                 list.push(params.data.choice1);
-               }
-               if (params.data.choice2 && params.data.choice2 !== null && params.data.choice2 !== '') {
-                 list.push(params.data.choice2);
-               }
-               if (params.data.choice3 && params.data.choice3 !== null && params.data.choice3 !== '') {
-                 list.push(params.data.choice3);
-               }
-               if (params.data.choice4 && params.data.choice4 !== null && params.data.choice4 !== '') {
-                 list.push(params.data.choice4);
-               }
-               if (params.data.choice5  && params.data.choice5 !== null && params.data.choice5 !== '') {
-                 list.push(params.data.choice5);
-               }
 
-
-               return {
-            values: list
-
-          };
-        }}
-
-
-
-  ];
-    this.columnDefs.singleClickEdit = true;
 
    }
 
@@ -120,6 +84,52 @@ export class InterviewQuestionsComponent implements OnInit {
         type: { style: 'warning', icon: true },
 
     });
+}
+onLoadColumnDef(){
+  let refStatus = this.levels;
+  let refList={}
+  refStatus.forEach((x)=>{refList[x.levelId]=x.description})
+
+  this.columnDefs = [
+    { field: '', width: 30, editable: false, headerCheckboxSelection: true, checkboxSelection: true, },
+    {headerName: 'Question', field: 'question', editable: true},
+    {headerName: 'Choice 1', field: 'choice1', editable: true},
+    {headerName: 'Choice 2', field: 'choice2', editable: true},
+    {headerName: 'Choice 3', field: 'choice3', editable: true},
+    {headerName: 'Choice 4', field: 'choice4', editable: true},
+    {headerName: 'Choice 5', field: 'choice5', editable: true},
+    {headerName: 'Level', field: 'level.levelId', editable: true , cellEditor: 'agRichSelectCellEditor',refData: refList,
+    cellEditorParams: {values: Object.keys(refList) }},
+    {headerName: 'Correct Answer', field: 'correctanswer', editable: true , cellEditor: 'agRichSelectCellEditor',
+           cellEditorParams(params) {
+             const list = [];
+             if (params.data.choice1 && params.data.choice1 !== null && params.data.choice1 !== '') {
+               list.push(params.data.choice1);
+             }
+             if (params.data.choice2 && params.data.choice2 !== null && params.data.choice2 !== '') {
+               list.push(params.data.choice2);
+             }
+             if (params.data.choice3 && params.data.choice3 !== null && params.data.choice3 !== '') {
+               list.push(params.data.choice3);
+             }
+             if (params.data.choice4 && params.data.choice4 !== null && params.data.choice4 !== '') {
+               list.push(params.data.choice4);
+             }
+             if (params.data.choice5  && params.data.choice5 !== null && params.data.choice5 !== '') {
+               list.push(params.data.choice5);
+             }
+
+
+             return {
+          values: list
+
+        };
+      }}
+
+
+
+];
+  this.columnDefs.singleClickEdit = true;
 }
   onAdd() {
 
@@ -148,6 +158,7 @@ export class InterviewQuestionsComponent implements OnInit {
 
   }
   onSave() {
+
     this.questionService.saveQuestions(this.questions).subscribe(result => {
       this.showWarning('Questions Save Successfully');
       this.onGridReset();
@@ -166,6 +177,8 @@ export class InterviewQuestionsComponent implements OnInit {
       this.topics = result.data.topics;
       this.subTopics = result.data.subTopics;
       this.rowSelection = 'multiple';
+      this.levels = result.data.levels;
+      this.onLoadColumnDef();
 
     });
   }

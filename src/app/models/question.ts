@@ -1,4 +1,5 @@
 import {SubTopics} from './sub-topics';
+import{Levels} from './levels'
 
 export class Question {
                tempid:number;
@@ -11,6 +12,7 @@ export class Question {
       	  correctanswer: string;
 	       isactive: boolean;
            rmtCompetencySubTopics: SubTopics;
+           level:Levels;
             constructor(subTopic: SubTopics, id: number) {
 
                 this.tempid = id;
@@ -23,6 +25,6 @@ export class Question {
                 this.choice4 = null,
         this.correctanswer = null;
                 this.isactive = true;
-
+                this.level=new Levels();
     }
 }

@@ -160,7 +160,7 @@
                   </div>
                   <div class="btn-group pull-right mt-4 mb-3 mr-3">
                     <div>
-                        <button type="button" class="btn m-1" [disabled]="this.userForm.invalid" (click)="onAddTopic()">
+                        <button type="button" class="btn m-1" [disabled]="this.userForm.invalid" (click)="onAddSubTopic()">
                           <i class="fa  fa-plus-circle"  aria-hidden="true"></i> Add
                         </button>
 
@@ -186,7 +186,7 @@
                                     </ag-grid-angular>
                   </div>
                   <div class="row pull-right mr-3">
-                    <button type="button" [disabled]="validateTopic()"class="btn m-1" (click)="onSaveTopic()">
+                    <button type="button" [disabled]="validateSubTopic()"class="btn m-1" (click)="onSaveSubTopic()">
                       <i class="fa fa-save"  aria-hidden="true"></i> Submit
                     </button>
                   </div>

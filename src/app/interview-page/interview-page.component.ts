@@ -74,7 +74,7 @@ export class InterviewPageComponent implements OnInit {
     this.user  = {};
     this.userData = [];
     this.rowData = [];
-   
+
 
     this.columnDefs = [
       { field: '', width: 30, editable: false, headerCheckboxSelection: true, checkboxSelection: true, },
@@ -92,13 +92,13 @@ export class InterviewPageComponent implements OnInit {
 
 
   ];
-    
+
     this.columnDefs.singleClickEdit = true;
- 
-   
+
+
 
    }
-   
+
   ngOnInit() {
     this.onLoad();
 
@@ -107,9 +107,9 @@ export class InterviewPageComponent implements OnInit {
     let refStatus = this.listStatus;
     let refList={}
     refStatus.forEach((x)=>{
-      
+
       refList[x.statusId]=x.description
-     
+
 
     })
 
@@ -128,7 +128,7 @@ export class InterviewPageComponent implements OnInit {
              cellEditorParams: {values: Object.keys(refList) }}
 
   ];
-    
+
     this.columnDefs.singleClickEdit = true;
     this.gridApi.setColumnDefs(this.columnDefs)
   }
@@ -168,7 +168,7 @@ onSearch() {
       this.listStatus=result.data.status;
       this.rowSelection = 'multiple';
       this.loadColumn();
-      
+
 
     });
   }
@@ -239,7 +239,7 @@ loadCompetency(lineId) {
       this.gridApi = params.api;
 
       this.gridColumnApi = params.columnApi;
-      
+
 
     }
   }
