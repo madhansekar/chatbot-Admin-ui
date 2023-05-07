@@ -44,7 +44,7 @@
     "ngx-bootstrap-navbar": "0.0.4",
     "ngx-datatable": "^1.0.3",
     "ngx-select-ex": "^3.7.2",
-    "npm": "^6.11.3",
+    "npm": "^9.6.6",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "uninstall": "0.0.0",
@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.802.1",
-    "@angular/cli": "~8.2.1",
+    "@angular/cli": "~16.0.0",
     "@angular/compiler-cli": "~8.2.0",
     "@angular/language-service": "~8.2.0",
     "@types/jasmine": "~3.3.8",
